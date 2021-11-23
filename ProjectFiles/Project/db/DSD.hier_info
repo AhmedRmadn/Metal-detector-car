@@ -1,0 +1,25 @@
+|DSD
+bluetooth[0] => Equal0.IN1
+bluetooth[0] => Equal1.IN1
+bluetooth[0] => Equal2.IN0
+bluetooth[0] => Equal3.IN1
+bluetooth[1] => Equal0.IN0
+bluetooth[1] => Equal1.IN0
+bluetooth[1] => Equal2.IN1
+bluetooth[1] => Equal3.IN0
+prox => process_0.IN0
+prox => buzzer.DATAIN
+prox => process_0.IN1
+prox => process_0.IN1
+prox => process_0.IN0
+prox => process_0.IN0
+ultra => process_0.IN1
+ultra => process_0.IN1
+ultra => process_0.IN1
+motors[0] <= motors[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+motors[1] <= motors[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+motors[2] <= motors[2]$latch.DB_MAX_OUTPUT_PORT_TYPE
+motors[3] <= motors[3]$latch.DB_MAX_OUTPUT_PORT_TYPE
+buzzer <= prox.DB_MAX_OUTPUT_PORT_TYPE
+
+

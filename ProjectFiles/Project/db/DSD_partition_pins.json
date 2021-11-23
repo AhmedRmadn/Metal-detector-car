@@ -1,0 +1,45 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "motors[0]",
+					"strict" : false
+				},
+				{
+					"name" : "motors[1]",
+					"strict" : false
+				},
+				{
+					"name" : "motors[2]",
+					"strict" : false
+				},
+				{
+					"name" : "motors[3]",
+					"strict" : false
+				},
+				{
+					"name" : "buzzer",
+					"strict" : false
+				},
+				{
+					"name" : "bluetooth[1]",
+					"strict" : false
+				},
+				{
+					"name" : "bluetooth[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ultra",
+					"strict" : false
+				},
+				{
+					"name" : "prox",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

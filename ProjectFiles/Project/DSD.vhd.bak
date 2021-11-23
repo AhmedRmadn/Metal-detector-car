@@ -1,0 +1,84 @@
+library ieee;
+use ieee.std_logic_1164.all;
+entity DSD is
+port(
+    bluetooth : in std_logic_Vector(1 DownTo 0);
+    prox : in std_logic;
+    ultra : in std_logic;
+    Resetn : in std_logic;
+    motors : out std_logic_Vector(3 DownTo 0);
+    buzzer: out std_logic
+  
+    );
+end DSD;
+architecture arch of DSD is
+Type State is(S,M,U,P);
+SIGNAL presentState : State;
+begin
+   process(bluetooth,prox,ultra,Resetn)
+    Begin
+     if Resetn ='1' Then 
+         presentState <= S;
+      else
+      Case presentState Is
+         WHEN S => 
+          if prox = '1' THEN
+            presentState <= P;
+          elsif ultra ='1' THEN 
+            presentState <= U;
+          else
+            presentState <= M;
+          END IF;
+         WHEN M => 
+          if prox = '1' THEN
+            presentState <= P;
+          elsif ultra ='1' THEN 
+            presentState <= U;
+          else
+            presentState <= M;
+        END IF;
+         WHEN U => 
+          if prox = '1' THEN
+            presentState<= P;
+          elsif ultra ='1' AND bluetooth="11" THEN 
+            presentState <= U;
+          else
+            presentState <= M;
+        END IF;
+         WHEN P => 
+          if prox = '1' THEN
+            presentState<= P;
+          elsif ultra ='1' THEN 
+           presentState <= U;
+          else
+            presentState <= M;
+        END IF;
+      end case;
+      end if;
+    end process;
+    process(presentState,bluetooth,prox,ultra,Resetn)
+    begin
+    Case presentState is
+        WHEN M =>
+          buzzer <= '0';
+          if(bluetooth="11") then 
+             motors <="0101";
+          elsif(bluetooth="01") then 
+             motors <= "1001";
+          elsif(bluetooth="10") then 
+             motors <= "0110";
+          else 
+             motors <="0000";
+          end if;
+       WHEN U => 
+          buzzer <= '0';
+          motors <="0000";
+       when P =>
+          buzzer <= '1';
+          motors <="0000";
+       when S =>
+          buzzer <= '0';
+          motors <="0000";
+       end case;
+       end process;
+end arch;
